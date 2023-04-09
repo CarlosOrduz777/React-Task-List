@@ -5,24 +5,22 @@ import { useEffect } from "react"
 
 export const TaskList = ({initialList})=>{
     const [list, SetList] = useState([])
+    
+
 
     console.log(list);
     useEffect(() =>{
         const localStorageData = localStorage.getItem("taskList");
         const storedTaskList = JSON.parse(localStorageData);
-        if(storedTaskList!== null){
+        if(storedTaskList !== null ){
             SetList(storedTaskList);
         }else{
             SetList([]);
         }   
-    })
-    useEffect(() =>{
-        
-            SetList([]);
     },[])
     const addTaskToList = (task) => {
         let newList = [...list]
-        newList = [...list,{name:task}];
+        newList = [...list,{name:task, state:false}];
         SetList(newList);
         localStorage.setItem("taskList",JSON.stringify(newList));
     }
